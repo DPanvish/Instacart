@@ -1,110 +1,260 @@
-import { ArrowUpRightIcon, BikeIcon, ChevronDownIcon, LogOutIcon, MapPinIcon, MenuIcon, PackageIcon, SearchIcon, ShieldIcon, ShoppingCartIcon, UserIcon, XIcon } from "lucide-react";
-import { useState } from "react";
+import { type FormEvent, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import {
+  ArrowUpRightIcon,
+  BikeIcon,
+  ChevronDownIcon,
+  LogOutIcon,
+  MapPinIcon,
+  MenuIcon,
+  PackageIcon,
+  SearchIcon,
+  ShieldIcon,
+  ShoppingCartIcon,
+  SparklesIcon,
+  UserIcon,
+  XIcon,
+} from "lucide-react";
 
 const Navbar = () => {
-  const user: any = {name: "John Doe", email: "john@example.com", isAdmin: true};
-  const {cartCount, setIsCartOpen} = {
+  const user: any = { name: "John Doe", email: "john@example.com", isAdmin: true };
+  const { cartCount, setIsCartOpen } = {
     cartCount: 5,
-    setIsCartOpen: (_date: any) => {}
+    setIsCartOpen: (_date: any) => {},
   };
   const [searchQuery, setSearchQuery] = useState("");
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const navigate = useNavigate();
 
-  const handleSearch = (e: React.SubmitEvent) => {
+  const handleSearch = (e: FormEvent) => {
     e.preventDefault();
 
-    if(searchQuery.trim()){
+    if (searchQuery.trim()) {
       navigate(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
       setSearchQuery("");
     }
-  }
+  };
 
   const handleLogout = () => {
     setUserMenuOpen(false);
     navigate("/");
-  }
+  };
 
   return (
-    <nav className="bg-white sticky top-0 z-50 border-b border-app-border">
-      <div className="max-w-7xl mx-auto px-4 lg:px-8 flex items-center justify-between h-16 gap-4">
-        <Link to="/" className="flex items-center gap-2 text-[22px] font-medium shrink-0">
-          <BikeIcon size={24} /> Instacart
+    <nav className="bg-white/95 backdrop-blur-md sticky top-0 z-50 border-b border-[#e8e3d8]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16 gap-3 sm:gap-6">
+        {/* Brand Logo */}
+        <Link
+          to="/"
+          className="flex items-center gap-2.5 text-xl sm:text-2xl font-extrabold tracking-tight text-[#0f3822] shrink-0 group focus:outline-none"
+        >
+          <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-[#0f3822] to-[#16a34a] flex-center text-white shadow-sm group-hover:scale-105 transition-transform">
+            <BikeIcon className="w-5 h-5" />
+          </div>
+          <span>
+            Instacart<span className="text-[#f97316]">.</span>
+          </span>
         </Link>
 
-        <div className="w-full flex items-center justify-end gap-4 lg:gap-10">
-          <div className="hidden md:flex items-center gap-6 text-sm text-zinc-600">
-            <Link to="/">Home</Link>
-            <Link to="/products">Products</Link>
-            <Link to="/deals" className="text-app-orange">Deals</Link>
+        {/* Right Section / Desktop Links + Search + Actions */}
+        <div className="w-full flex items-center justify-end gap-3 sm:gap-6 lg:gap-8">
+          {/* Desktop Navigation Links */}
+          <div className="hidden md:flex items-center gap-1.5">
+            <Link to="/" className="nav-link">
+              Home
+            </Link>
+            <Link to="/products" className="nav-link">
+              Products
+            </Link>
+            <Link
+              to="/deals"
+              className="nav-link text-[#ea580c] hover:text-[#c2410c] hover:bg-[#fff4ed]"
+            >
+              <SparklesIcon className="w-3.5 h-3.5" />
+              <span>Deals</span>
+              <span className="badge-carrot text-[10px] py-0.5 px-1.5 ml-0.5 font-bold">
+                HOT
+              </span>
+            </Link>
           </div>
 
-          <form onSubmit={handleSearch} className="hidden sm:flex flex-1 max-w-sm text-xs sm:text-sm">
-            <div className="relstive w-full">
-              <SearchIcon className="absolute left-2.5 top-1/2 -translate-y-1/2 size-4 text-zince-500" />
-              <input 
+          {/* Search Form */}
+          <form
+            onSubmit={handleSearch}
+            className="hidden sm:flex flex-1 max-w-sm lg:max-w-md relative"
+          >
+            <div className="relative w-full">
+              <SearchIcon className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#7b8e83] pointer-events-none" />
+              <input
                 type="text"
-                placeholder="Search for groceries..."
+                placeholder="Search fresh groceries, dairy, snacks..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-8 p-2 bg-orange-50 rounded-full ring ring-app-orange/15 focus:ring-app-orange/30"
+                className="nav-search-input"
               />
             </div>
           </form>
 
-          <div className="flex items-center gap-3">
-            <button className="relative p-2 rounded-xl" onClick={() => setIsCartOpen(true)}>
-              <ShoppingCartIcon className="size-5 text-zinc-900" />
-              {cartCount > 0 && <span className="absolute -top-1 -right-1 size-4 bg-app-orange text-white text-[10px] rounded-full flex-center">{cartCount}</span>}
+          {/* Action Buttons: Cart & User Account */}
+          <div className="flex items-center gap-2 sm:gap-3">
+            {/* Cart Trigger Button */}
+            <button
+              type="button"
+              onClick={() => setIsCartOpen(true)}
+              aria-label="View shopping cart"
+              className="relative p-2.5 rounded-xl text-[#0e1e15] hover:bg-[#ebf7ee] hover:text-[#0f3822] transition-colors focus:outline-none"
+            >
+              <ShoppingCartIcon className="w-5 h-5" />
+              {cartCount > 0 && (
+                <span className="absolute -top-1 -right-1 min-w-[18px] h-[18px] bg-[#f97316] text-white text-[10px] font-bold rounded-full flex-center px-1 border-2 border-white shadow-xs">
+                  {cartCount}
+                </span>
+              )}
             </button>
 
+            {/* User Account / Dropdown */}
             <div className="relative">
               {user ? (
-                <button className="flex items-center gap-2 p-2">
-                  <div className="size-7 rounded-full bg-green-950 text-white flex-center">
+                <button
+                  type="button"
+                  onClick={() => setUserMenuOpen(!userMenuOpen)}
+                  className="flex items-center gap-2 p-1 sm:pr-2.5 rounded-full hover:bg-[#fbf9f5] border border-transparent hover:border-[#e8e3d8] transition-all focus:outline-none"
+                >
+                  <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-[#0f3822] to-[#16a34a] text-white font-bold text-xs flex-center shadow-xs">
                     {user.name.charAt(0).toUpperCase()}
                   </div>
-                  <ChevronDownIcon onClick={() => setUserMenuOpen(!userMenuOpen)} className="size-3 text-zinc-500" />
+                  <span className="hidden sm:inline text-xs font-semibold text-[#0e1e15] max-w-[90px] truncate">
+                    {user.name.split(" ")[0]}
+                  </span>
+                  <ChevronDownIcon
+                    className={`w-3.5 h-3.5 text-[#6e7f75] transition-transform duration-200 ${
+                      userMenuOpen ? "rotate-180" : ""
+                    }`}
+                  />
                 </button>
               ) : (
-                <div className="flex-center gap-2">
-                  <Link to="/login" className="hidden md:flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-green-950-light transition-colors">
-                    <UserIcon size={16} /> Sign In
+                <div className="flex items-center gap-2">
+                  <Link
+                    to="/login"
+                    className="hidden md:inline-flex btn-primary !py-2 !px-4 text-xs font-semibold"
+                  >
+                    <UserIcon className="w-3.5 h-3.5" />
+                    <span>Sign In</span>
                   </Link>
-                  {userMenuOpen ? <XIcon className="md:hidden" onClick={() => setUserMenuOpen(!userMenuOpen)}/> : <MenuIcon className="md:hidden" onClick={() => setUserMenuOpen(!userMenuOpen)} />}
+
+                  <button
+                    type="button"
+                    onClick={() => setUserMenuOpen(!userMenuOpen)}
+                    aria-label="Toggle mobile menu"
+                    className="md:hidden p-2 rounded-xl text-[#0e1e15] hover:bg-[#fbf9f5] transition-colors focus:outline-none"
+                  >
+                    {userMenuOpen ? (
+                      <XIcon className="w-5 h-5" />
+                    ) : (
+                      <MenuIcon className="w-5 h-5" />
+                    )}
+                  </button>
                 </div>
               )}
 
+              {/* Dropdown Menu */}
               {userMenuOpen && (
                 <>
-                  <div className="fixed inset-0 z-40" onClick={() => setUserMenuOpen(false)} />
-                    <div className="absolute right-0 mt-2.5 w-56 bg-white rounded-xl shadow-lg border border-app-border py-2 z-50 animate-fade-in">
+                  {/* Backdrop overlay */}
+                  <div
+                    className="fixed inset-0 z-40"
+                    onClick={() => setUserMenuOpen(false)}
+                  />
+
+                  {/* Dropdown Container */}
+                  <div className="dropdown-menu absolute right-0 mt-2.5 w-60 z-50 animate-fade-in">
+                    {/* User Profile Header */}
+                    {user && (
+                      <div className="px-4 py-3 bg-[#fbf9f5] border-b border-[#e8e3d8]">
+                        <p className="text-sm font-bold text-[#0e1e15] truncate">
+                          {user.name}
+                        </p>
+                        <p className="text-xs text-[#6e7f75] truncate">
+                          {user.email}
+                        </p>
+                      </div>
+                    )}
+
+                    {/* Navigation Links inside Dropdown */}
+                    <div className="py-1" onClick={() => setUserMenuOpen(false)}>
+                      {!user && (
+                        <Link to="/login" className="dropdown-link">
+                          <UserIcon className="w-4 h-4 text-[#108942]" />
+                          <span>Sign In</span>
+                        </Link>
+                      )}
+
                       {user && (
-                        <div className="px-4 py-2 border-b border-app-border">
-                          <p className="text-sm font-medium text-zinc-900">{user?.name}</p>
-                          <p className="text-xs text-zinc-500">{user?.email}</p>
+                        <Link to="/orders" className="dropdown-link">
+                          <PackageIcon className="w-4 h-4 text-[#108942]" />
+                          <span>My Orders</span>
+                        </Link>
+                      )}
+
+                      {user && (
+                        <Link to="/addresses" className="dropdown-link">
+                          <MapPinIcon className="w-4 h-4 text-[#108942]" />
+                          <span>Saved Addresses</span>
+                        </Link>
+                      )}
+
+                      {/* Mobile-only section navigation */}
+                      <div className="md:hidden border-t border-[#e8e3d8] my-1 pt-1">
+                        <Link to="/" className="dropdown-link">
+                          <ArrowUpRightIcon className="w-4 h-4" />
+                          <span>Home</span>
+                        </Link>
+                        <Link to="/products" className="dropdown-link">
+                          <ArrowUpRightIcon className="w-4 h-4" />
+                          <span>Products</span>
+                        </Link>
+                        <Link to="/deals" className="dropdown-link text-[#ea580c]">
+                          <SparklesIcon className="w-4 h-4 text-[#ea580c]" />
+                          <span>Deals</span>
+                          <span className="badge-carrot text-[10px] py-0.5 px-1.5 ml-auto font-bold">
+                            HOT
+                          </span>
+                        </Link>
+                      </div>
+
+                      {/* Admin Panel Link */}
+                      {user?.isAdmin && (
+                        <div className="border-t border-[#e8e3d8] my-1 pt-1">
+                          <Link
+                            to="/admin/products"
+                            className="dropdown-link hover:bg-[#fff4ed]"
+                          >
+                            <ShieldIcon className="w-4 h-4 text-[#ea580c]" />
+                            <span className="font-semibold text-[#ea580c]">
+                              Admin Panel
+                            </span>
+                            <span className="badge-carrot text-[10px] py-0.5 px-1.5 ml-auto">
+                              ADMIN
+                            </span>
+                          </Link>
                         </div>
                       )}
 
-                      <div onClick={() => setUserMenuOpen(false)}>
-                        {!user && <Link to="/login" className="dropdown-link"><UserIcon size={16} /> Sign In</Link>}
-                        {user && <Link to="/orders" className="dropdown-link"><PackageIcon size={16} /> My Orders</Link>}
-                        {user && <Link to="/addresses" className="dropdown-link"><MapPinIcon size={16} /> Addresses</Link>}
-                        <Link to="/products" className="dropdown-link md:hidden"><ArrowUpRightIcon size={16} /> Products</Link>
-                        <Link to="/deals" className="dropdown-link md:hidden"><ArrowUpRightIcon size={16} /> Deals</Link>\
-                        
-                        {user?.isAdmin && (
-                          <Link to="/admin/products" className="dropdown-link"><ShieldIcon className="text-app-orange-dark" size={16}/> <span className="text-app-orange-dark">Admin Panel</span></Link>
-                        )}
-
-                        {user && (
-                          <div className="border-t border-app-border pt-1">
-                            <button onClick={handleLogout} className="flex items-center gap-3 px-4 py-2.5 text-sm text-app-error hover:bg-red-50 w-full transition-colors"><LogOutIcon size={16} /> Logout</button>
-                          </div>
-                        )}
-                      </div>
+                      {/* Logout Action */}
+                      {user && (
+                        <div className="border-t border-[#e8e3d8] my-1 pt-1">
+                          <button
+                            type="button"
+                            onClick={handleLogout}
+                            className="dropdown-link-danger"
+                          >
+                            <LogOutIcon className="w-4 h-4" />
+                            <span>Logout</span>
+                          </button>
+                        </div>
+                      )}
                     </div>
+                  </div>
                 </>
               )}
             </div>
@@ -112,7 +262,7 @@ const Navbar = () => {
         </div>
       </div>
     </nav>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;
