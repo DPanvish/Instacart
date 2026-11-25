@@ -2,11 +2,6 @@
 @import "tailwindcss";
 
 @theme {
-  /* ==========================================================================
-     INSTACART FRESH GROCERY DESIGN SYSTEM
-     ========================================================================== */
-
-  /* Primary Brand Greens (Fresh, Organic, Crisp) */
   --color-primary-darkest: #071e14;
   --color-primary-dark: #0f3822;
   --color-primary: #108942;
@@ -15,96 +10,51 @@
   --color-primary-subtle: #ebf7ee;
   --color-primary-border: #bbf0cd;
 
-  /* Accent Warm Tones (Carrot Orange & Sunny Citrus) */
   --color-accent: #f97316;
   --color-accent-hover: #ea580c;
   --color-accent-dark: #c2410c;
   --color-accent-subtle: #fff4ed;
   --color-accent-border: #fed7aa;
-  
-  --color-amber-badge: #f59e0b;
-  --color-amber-subtle: #fef3c7;
 
-  /* Neutral Culinary Canvas & Surfaces */
   --color-bg-cream: #fbf9f5;
   --color-bg-cream-dark: #f3efe6;
   --color-surface-white: #ffffff;
-  --color-surface-card: #ffffff;
-  --color-surface-muted: #f7f6f2;
-
-  /* Typography / Text Colors */
-  --color-text-main: #0e1e15;
-  --color-text-secondary: #3c4c42;
-  --color-text-muted: #6e7f75;
-  --color-text-light: #9aaba1;
-
-  /* Borders & Dividers */
   --color-border-warm: #e8e3d8;
-  --color-border-subtle: #f0ece3;
-  --color-border-focus: #108942;
 
-  /* Status Colors */
-  --color-status-success: #16a34a;
-  --color-status-error: #ef4444;
-  --color-status-warning: #f59e0b;
-  --color-status-info: #0ea5e9;
-
-  /* Backwards compatibility aliases */
   --color-app-green: #0f3822;
   --color-app-green-light: #1b5333;
-  --color-app-green-lighter: #2f7a4e;
   --color-app-orange: #f97316;
   --color-app-orange-dark: #ea580c;
   --color-app-cream: #fbf9f5;
-  --color-app-cream-dark: #f3efe6;
   --color-app-text: #0e1e15;
   --color-app-text-light: #6e7f75;
   --color-app-border: #e8e3d8;
-  --color-app-success: #16a34a;
-  --color-app-error: #ef4444;
-  --color-app-warning: #f59e0b;
 
-  /* Typography Fonts */
   --font-sans: "Plus Jakarta Sans", "Outfit", system-ui, -apple-system, sans-serif;
-  --font-display: "Outfit", system-ui, sans-serif;
   --font-serif: "DM Serif Display", serif;
 }
 
-/* ==========================================================================
-   GLOBAL RESET & BASE STYLES
-   ========================================================================== */
-html {
-  scroll-behavior: smooth;
-}
-
+/* Base */
 body {
   font-family: var(--font-sans);
-  color: var(--color-text-main);
-  background-color: var(--color-bg-cream);
+  color: #0e1e15;
+  background-color: #fbf9f5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  line-height: 1.5;
 }
 
-/* Clean Custom Scrollbar */
+/* Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
-
 ::-webkit-scrollbar-track {
-  background: var(--color-bg-cream-dark);
+  background: #f3efe6;
 }
-
 ::-webkit-scrollbar-thumb {
   background: #cbd5cf;
   border-radius: 9999px;
 }
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--color-primary-light);
-}
-
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
@@ -113,671 +63,263 @@ body {
   scrollbar-width: none;
 }
 
-/* Base button and interactive resets */
-a,
-button {
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-  cursor: pointer;
-}
-
-input:focus,
-textarea:focus,
-select:focus {
-  outline: none;
-}
-
-/* ==========================================================================
-   REUSABLE UTILITIES & LAYOUT
-   ========================================================================== */
+/* Common Layout Utilities */
 .flex-center {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  @apply flex items-center justify-center;
 }
 
 .flex-between {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  @apply flex items-center justify-between;
 }
 
 /* ==========================================================================
-   BUTTON SYSTEM (Primary, Accent, Secondary, Outline, Social, Ghost)
+   BUTTONS (Tailwind Format)
    ========================================================================== */
 .btn-primary {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  background-color: #108942;
-  color: #ffffff;
-  font-weight: 600;
-  font-size: 0.95rem;
-  padding: 0.825rem 1.5rem;
-  border-radius: 0.875rem;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  box-shadow: 0 4px 14px 0 rgba(16, 137, 66, 0.32), 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  transition: all 0.2s ease;
-  user-select: none;
-}
-
-.btn-primary:hover:not(:disabled) {
-  background-color: #0c7336;
-  transform: translateY(-1px);
-  box-shadow: 0 6px 20px 0 rgba(16, 137, 66, 0.42), 0 2px 4px 0 rgba(0, 0, 0, 0.08);
-}
-
-.btn-primary:active:not(:disabled) {
-  transform: translateY(0);
-  box-shadow: 0 2px 8px 0 rgba(16, 137, 66, 0.3);
-}
-
-.btn-primary:disabled {
-  opacity: 0.55;
-  cursor: not-allowed;
-  transform: none;
-  box-shadow: none;
+  @apply inline-flex items-center justify-center gap-2 font-semibold text-sm sm:text-base px-6 py-3.5 rounded-xl text-white bg-[#108942] hover:bg-[#0c7336] shadow-sm hover:shadow-md transition-all active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed select-none;
 }
 
 .btn-forest {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  background-color: #0f3822;
-  color: #ffffff;
-  font-weight: 600;
-  font-size: 0.95rem;
-  padding: 0.825rem 1.5rem;
-  border-radius: 0.875rem;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 4px 14px 0 rgba(15, 56, 34, 0.28);
-  transition: all 0.2s ease;
-}
-
-.btn-forest:hover:not(:disabled) {
-  background-color: #071e14;
-  transform: translateY(-1px);
-  box-shadow: 0 6px 20px 0 rgba(15, 56, 34, 0.38);
+  @apply inline-flex items-center justify-center gap-2 font-semibold text-sm px-6 py-3 rounded-xl text-white bg-[#0f3822] hover:bg-[#071e14] shadow-sm hover:shadow-md transition-all;
 }
 
 .btn-accent {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  background-color: #f97316;
-  color: #ffffff;
-  font-weight: 600;
-  font-size: 0.95rem;
-  padding: 0.825rem 1.5rem;
-  border-radius: 0.875rem;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  box-shadow: 0 4px 14px 0 rgba(249, 115, 22, 0.35);
-  transition: all 0.2s ease;
-}
-
-.btn-accent:hover:not(:disabled) {
-  background-color: #ea580c;
-  transform: translateY(-1px);
-  box-shadow: 0 6px 20px 0 rgba(249, 115, 22, 0.45);
+  @apply inline-flex items-center justify-center gap-2 font-semibold text-sm sm:text-base px-6 py-3 rounded-xl text-white bg-[#f97316] hover:bg-[#ea580c] shadow-sm hover:shadow-md transition-all active:scale-[0.98];
 }
 
 .btn-secondary {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  background-color: #ebf7ee;
-  color: #0f3822;
-  font-weight: 600;
-  font-size: 0.95rem;
-  padding: 0.825rem 1.5rem;
-  border-radius: 0.875rem;
-  border: 1px solid #bbf0cd;
-  transition: all 0.2s ease;
-}
-
-.btn-secondary:hover:not(:disabled) {
-  background-color: #dbf1e1;
-  color: #071e14;
-  transform: translateY(-1px);
+  @apply inline-flex items-center justify-center gap-2 font-semibold text-sm px-5 py-2.5 rounded-xl text-[#0f3822] bg-[#ebf7ee] hover:bg-[#dbf1e1] border border-[#bbf0cd] transition-all;
 }
 
 .btn-outline {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  background-color: #ffffff;
-  color: #0e1e15;
-  font-weight: 600;
-  font-size: 0.95rem;
-  padding: 0.825rem 1.5rem;
-  border-radius: 0.875rem;
-  border: 1.5px solid #e8e3d8;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.04);
-  transition: all 0.2s ease;
+  @apply inline-flex items-center justify-center gap-2 font-semibold text-sm px-5 py-2.5 rounded-xl text-[#0e1e15] bg-white hover:bg-[#fbf9f5] border border-[#e8e3d8] hover:border-[#cbd5cf] transition-all shadow-xs;
 }
 
-.btn-outline:hover:not(:disabled) {
-  background-color: #fbf9f5;
-  border-color: #cbd5cf;
-  transform: translateY(-1px);
+.btn-add-cart {
+  @apply size-8 rounded-full bg-[#108942] text-white flex items-center justify-center shrink-0 hover:bg-[#0c7336] shadow-xs hover:shadow-md active:scale-90 transition-all focus:outline-none;
 }
 
-.btn-social {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.75rem;
-  width: 100%;
-  background-color: #ffffff;
-  color: #1e293b;
-  font-weight: 500;
-  font-size: 0.9rem;
-  padding: 0.75rem 1rem;
-  border-radius: 0.875rem;
-  border: 1.5px solid #e8e3d8;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
-  transition: all 0.2s ease;
+.btn-store-apple {
+  @apply px-6 py-3 rounded-2xl bg-white text-[#0f3822] font-bold text-sm hover:bg-[#fbf9f5] hover:scale-105 active:scale-95 transition-all shadow-md inline-flex items-center gap-2.5 focus:outline-none;
 }
 
-.btn-social:hover {
-  background-color: #fbf9f5;
-  border-color: #cbd5cf;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-  transform: translateY(-1px);
+.btn-store-google {
+  @apply px-6 py-3 rounded-2xl bg-white/10 hover:bg-white/20 text-white font-bold text-sm backdrop-blur-md border border-white/20 hover:scale-105 active:scale-95 transition-all inline-flex items-center gap-2.5 focus:outline-none;
 }
 
 /* ==========================================================================
-   FORM & INPUT SYSTEM
+   FORM & INPUTS (Tailwind Format)
    ========================================================================== */
 .grocery-label {
-  display: block;
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: #0e1e15;
-  margin-bottom: 0.375rem;
-  letter-spacing: -0.01em;
+  @apply block text-sm font-semibold text-[#0e1e15] mb-1.5 tracking-tight;
 }
 
 .grocery-input-wrapper {
-  position: relative;
-  display: flex;
-  align-items: center;
-  width: 100%;
+  @apply relative flex items-center w-full;
 }
 
 .grocery-input {
-  width: 100%;
-  font-size: 0.925rem;
-  color: #0e1e15;
-  background-color: #ffffff;
-  border: 1.5px solid #e2ddd3;
-  border-radius: 0.875rem;
-  padding: 0.825rem 1rem;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  @apply w-full text-sm text-[#0e1e15] bg-white border border-[#e8e3d8] rounded-xl px-4 py-3 placeholder:text-[#9aaba1] hover:border-[#cbd5cf] focus:border-[#108942] focus:ring-2 focus:ring-[#108942]/15 focus:outline-none transition-all shadow-xs;
 }
 
 .grocery-input.with-leading-icon {
-  padding-left: 2.75rem;
+  @apply pl-11;
 }
 
 .grocery-input.with-trailing-icon {
-  padding-right: 2.75rem;
-}
-
-.grocery-input::placeholder {
-  color: #9aaba1;
-}
-
-.grocery-input:hover {
-  border-color: #cbd5cf;
-  background-color: #ffffff;
-}
-
-.grocery-input:focus {
-  border-color: #108942;
-  background-color: #ffffff;
-  box-shadow: 0 0 0 4px rgba(16, 137, 66, 0.12), 0 2px 4px rgba(0, 0, 0, 0.04);
+  @apply pr-11;
 }
 
 .grocery-input-icon {
-  position: absolute;
-  left: 0.95rem;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 1.15rem;
-  height: 1.15rem;
-  color: #7b8e83;
-  pointer-events: none;
-  transition: color 0.2s ease;
+  @apply absolute left-3.5 top-1/2 -translate-y-1/2 size-4 text-[#7b8e83] pointer-events-none transition-colors;
 }
 
 .grocery-input-wrapper:focus-within .grocery-input-icon {
-  color: #108942;
+  @apply text-[#108942];
 }
 
 .grocery-input-action {
-  position: absolute;
-  right: 0.85rem;
-  top: 50%;
-  transform: translateY(-50%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #7b8e83;
-  padding: 0.25rem;
-  border-radius: 0.5rem;
-  transition: all 0.2s ease;
-}
-
-.grocery-input-action:hover {
-  color: #0e1e15;
-  background-color: #f3efe6;
+  @apply absolute right-3 top-1/2 -translate-y-1/2 p-1 text-[#7b8e83] hover:text-[#0e1e15] rounded-md transition-colors;
 }
 
 /* ==========================================================================
-   SEGMENTED CONTROL / TABS
-   ========================================================================== */
-.grocery-tabs {
-  display: flex;
-  background-color: #ede8de;
-  padding: 0.25rem;
-  border-radius: 0.875rem;
-  gap: 0.25rem;
-  position: relative;
-}
-
-.grocery-tab-btn {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  padding: 0.625rem 1rem;
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: #55675c;
-  border-radius: 0.675rem;
-  transition: all 0.2s ease;
-  user-select: none;
-}
-
-.grocery-tab-btn:hover:not(.active) {
-  color: #0e1e15;
-}
-
-.grocery-tab-btn.active {
-  background-color: #ffffff;
-  color: #0f3822;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
-}
-
-/* ==========================================================================
-   CARDS & CONTAINERS
+   CARDS & CONTAINERS (Tailwind Format)
    ========================================================================== */
 .grocery-card {
-  background-color: #ffffff;
-  border: 1.5px solid #e8e3d8;
-  border-radius: 1.25rem;
-  padding: 1.5rem;
-  box-shadow: 0 4px 16px -2px rgba(15, 56, 34, 0.04), 0 2px 6px -1px rgba(0, 0, 0, 0.02);
-  transition: all 0.25s ease;
-}
-
-.grocery-card-hover:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 28px -4px rgba(15, 56, 34, 0.08), 0 4px 12px -2px rgba(0, 0, 0, 0.03);
-  border-color: #cbd5cf;
+  @apply bg-white border border-[#e8e3d8] rounded-2xl p-6 shadow-xs hover:shadow-md transition-all;
 }
 
 .grocery-card-glass {
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  border-radius: 1.25rem;
-  color: #0e1e15;
-  box-shadow: 0 8px 32px 0 rgba(15, 56, 34, 0.08);
+  @apply bg-white/85 backdrop-blur-md border border-white/60 rounded-2xl p-6 shadow-md text-[#0e1e15];
 }
 
 .grocery-card-glass-dark {
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 1.25rem;
-  color: #ffffff;
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.25);
-  transition: all 0.25s ease;
+  @apply bg-white/10 backdrop-blur-md border border-white/15 rounded-2xl text-white shadow-lg transition-all hover:bg-white/15;
 }
 
-.grocery-card-glass-dark:hover {
-  background: rgba(255, 255, 255, 0.12);
-  border-color: rgba(255, 255, 255, 0.25);
+/* Product Card */
+.product-card {
+  @apply bg-white rounded-2xl border border-[#e8e3d8] hover:border-[#bbf0cd] shadow-xs hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between overflow-hidden cursor-pointer select-none;
 }
 
-.grocery-card-dark {
-  background: linear-gradient(145deg, #0f3822 0%, #071e14 100%);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 1.5rem;
-  color: #ffffff;
-  box-shadow: 0 20px 40px -15px rgba(7, 30, 20, 0.5);
+.product-card-image-wrap {
+  @apply relative aspect-square overflow-hidden bg-[#fbf9f5] flex items-center justify-center p-4;
+}
+
+.product-card-image {
+  @apply w-full h-full object-contain group-hover:scale-108 transition-transform duration-300;
+}
+
+.product-card-body {
+  @apply p-3.5 sm:p-4 flex flex-col flex-1 justify-between;
+}
+
+.product-card-title {
+  @apply text-xs sm:text-sm font-semibold text-[#0e1e15] group-hover:text-[#108942] transition-colors leading-snug mb-2 line-clamp-2;
+}
+
+.product-card-footer {
+  @apply flex items-center justify-between pt-2 border-t border-[#f0ece3] mt-auto;
+}
+
+.product-price {
+  @apply text-base sm:text-lg font-extrabold text-[#0f3822] tracking-tight;
+}
+
+.product-unit {
+  @apply text-[11px] sm:text-xs font-medium text-[#6e7f75];
+}
+
+.product-price-old {
+  @apply text-[11px] text-[#9aaba1] line-through ml-1;
 }
 
 /* ==========================================================================
-   BADGES & PILLS
+   SECTION HEADERS (Tailwind Format)
    ========================================================================== */
-.badge-fresh {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.375rem;
-  background-color: #ebf7ee;
-  color: #0f3822;
-  border: 1px solid #bbf0cd;
-  font-size: 0.775rem;
-  font-weight: 600;
-  padding: 0.3rem 0.75rem;
-  border-radius: 9999px;
-  letter-spacing: 0.01em;
+.section-header {
+  @apply flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4;
 }
 
-.badge-carrot {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.375rem;
-  background-color: #fff4ed;
-  color: #ea580c;
-  border: 1px solid #fed7aa;
-  font-size: 0.775rem;
-  font-weight: 600;
-  padding: 0.3rem 0.75rem;
-  border-radius: 9999px;
+.section-title {
+  @apply text-2xl sm:text-3xl font-extrabold text-[#0e1e15] tracking-tight;
 }
 
-.badge-amber {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.375rem;
-  background-color: #fef3c7;
-  color: #b45309;
-  border: 1px solid #fde68a;
-  font-size: 0.775rem;
-  font-weight: 600;
-  padding: 0.3rem 0.75rem;
-  border-radius: 9999px;
+.section-subtitle {
+  @apply text-sm text-[#6e7f75] mt-1;
 }
 
-.badge-glass-dark {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
-  background: rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  color: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  font-size: 0.8rem;
-  font-weight: 500;
-  padding: 0.4rem 0.85rem;
-  border-radius: 9999px;
+.section-link {
+  @apply inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-[#108942] hover:text-[#0c7336] transition-colors shrink-0;
 }
 
 /* ==========================================================================
-   NAVIGATION & DROPDOWNS
+   CATEGORY TILES (Tailwind Format)
+   ========================================================================== */
+.category-scroll-row {
+  @apply flex items-center gap-4 sm:gap-6 overflow-x-auto scroll-smooth pb-4 pt-1;
+}
+
+.category-item {
+  @apply flex flex-col items-center gap-3 min-w-[95px] sm:min-w-[120px] transition-transform select-none;
+}
+
+.category-tile {
+  @apply size-20 sm:size-28 rounded-3xl p-3 sm:p-4 bg-white border border-[#e8e3d8] flex items-center justify-center overflow-hidden shadow-xs group-hover:border-[#108942] group-hover:bg-[#ebf7ee] group-hover:-translate-y-1 group-hover:shadow-md transition-all duration-300;
+}
+
+.category-tile-img {
+  @apply w-full h-full object-contain group-hover:scale-110 transition-transform duration-300;
+}
+
+.category-title {
+  @apply text-xs sm:text-sm font-semibold text-[#3c4c42] group-hover:text-[#108942] text-center leading-snug transition-colors line-clamp-2;
+}
+
+/* ==========================================================================
+   FEATURES SECTION (Tailwind Format)
+   ========================================================================== */
+.features-card {
+  @apply bg-white py-6 sm:py-8 px-6 sm:px-8 border border-[#e8e3d8] rounded-2xl shadow-xs mb-12;
+}
+
+.feature-item {
+  @apply flex items-center gap-4;
+}
+
+.feature-icon-wrapper {
+  @apply size-12 rounded-2xl bg-gradient-to-tr from-[#ebf7ee] to-[#d8f3e0] border border-[#bbf0cd] text-[#108942] flex items-center justify-center shrink-0 shadow-xs group-hover:scale-105 transition-transform duration-200;
+}
+
+.feature-title {
+  @apply text-sm font-bold text-[#0e1e15] tracking-tight mb-0.5;
+}
+
+.feature-desc {
+  @apply text-xs text-[#6e7f75] leading-relaxed;
+}
+
+/* ==========================================================================
+   NAVIGATION & DROPDOWNS (Tailwind Format)
    ========================================================================== */
 .nav-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.375rem;
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: #3c4c42;
-  padding: 0.4rem 0.75rem;
-  border-radius: 0.625rem;
-  transition: all 0.2s ease;
-}
-
-.nav-link:hover {
-  color: #108942;
-  background-color: #ebf7ee;
-}
-
-.nav-link.active {
-  color: #0f3822;
-  background-color: #ebf7ee;
+  @apply inline-flex items-center gap-1.5 text-sm font-semibold text-[#3c4c42] px-3 py-1.5 rounded-lg hover:text-[#108942] hover:bg-[#ebf7ee] transition-all;
 }
 
 .nav-search-input {
-  width: 100%;
-  font-size: 0.875rem;
-  color: #0e1e15;
-  background-color: #fbf9f5;
-  border: 1.5px solid #e8e3d8;
-  border-radius: 9999px;
-  padding: 0.6rem 1rem 0.6rem 2.6rem;
-  transition: all 0.2s ease;
-}
-
-.nav-search-input::placeholder {
-  color: #9aaba1;
-}
-
-.nav-search-input:hover {
-  background-color: #ffffff;
-  border-color: #cbd5cf;
-}
-
-.nav-search-input:focus {
-  background-color: #ffffff;
-  border-color: #108942;
-  box-shadow: 0 0 0 3px rgba(16, 137, 66, 0.12);
-  outline: none;
+  @apply w-full text-sm text-[#0e1e15] bg-[#fbf9f5] border border-[#e8e3d8] rounded-full pl-10 pr-4 py-2 placeholder:text-[#9aaba1] hover:bg-white hover:border-[#cbd5cf] focus:bg-white focus:border-[#108942] focus:ring-2 focus:ring-[#108942]/15 focus:outline-none transition-all;
 }
 
 .dropdown-menu {
-  background-color: #ffffff;
-  border: 1.5px solid #e8e3d8;
-  border-radius: 1rem;
-  box-shadow: 0 16px 36px -4px rgba(15, 56, 34, 0.1), 0 4px 12px -2px rgba(0, 0, 0, 0.05);
-  overflow: hidden;
-  padding: 0.375rem 0;
-  z-index: 50;
+  @apply bg-white border border-[#e8e3d8] rounded-2xl shadow-xl overflow-hidden py-1.5 z-50;
 }
 
 .dropdown-link {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  width: 100%;
-  padding: 0.65rem 1rem;
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: #3c4c42;
-  transition: all 0.15s ease;
-  user-select: none;
-}
-
-.dropdown-link:hover {
-  background-color: #ebf7ee;
-  color: #0f3822;
+  @apply flex items-center gap-3 w-full px-4 py-2.5 text-sm font-medium text-[#3c4c42] hover:bg-[#ebf7ee] hover:text-[#0f3822] transition-colors select-none;
 }
 
 .dropdown-link-danger {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  width: 100%;
-  padding: 0.65rem 1rem;
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: #dc2626;
-  transition: all 0.15s ease;
-  user-select: none;
-}
-
-.dropdown-link-danger:hover {
-  background-color: #fee2e2;
-  color: #b91c1c;
+  @apply flex items-center gap-3 w-full px-4 py-2.5 text-sm font-medium text-red-600 hover:bg-red-50 transition-colors select-none;
 }
 
 /* ==========================================================================
-   FUTURE GROCERY PAGES EXTENSIONS (Products, Deals, Cart, Checkout)
+   BADGES & PILLS (Tailwind Format)
    ========================================================================== */
-.grocery-container {
-  max-width: 80rem;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 1rem;
-  padding-right: 1rem;
-}
-@media (min-width: 640px) {
-  .grocery-container {
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-  }
-}
-@media (min-width: 1024px) {
-  .grocery-container {
-    padding-left: 2rem;
-    padding-right: 2rem;
-  }
+.badge-fresh {
+  @apply inline-flex items-center gap-1.5 bg-[#ebf7ee] text-[#0f3822] border border-[#bbf0cd] text-xs font-semibold px-2.5 py-1 rounded-full;
 }
 
-.grocery-product-card {
-  background-color: #ffffff;
-  border: 1.5px solid #e8e3d8;
-  border-radius: 1.25rem;
-  padding: 1rem;
-  display: flex;
-  flex-direction: column;
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  position: relative;
+.badge-carrot {
+  @apply inline-flex items-center gap-1.5 bg-[#fff4ed] text-[#ea580c] border border-[#fed7aa] text-xs font-semibold px-2.5 py-1 rounded-full;
 }
 
-.grocery-product-card:hover {
-  transform: translateY(-4px);
-  border-color: #bbf0cd;
-  box-shadow: 0 16px 32px -8px rgba(15, 56, 34, 0.1), 0 4px 12px -2px rgba(0, 0, 0, 0.04);
+.badge-amber {
+  @apply inline-flex items-center gap-1.5 bg-[#fef3c7] text-[#b45309] border border-[#fde68a] text-xs font-semibold px-2.5 py-1 rounded-full;
 }
 
 .badge-discount {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.25rem;
-  background-color: #fee2e2;
-  color: #dc2626;
-  border: 1px solid #fecaca;
-  font-size: 0.725rem;
-  font-weight: 700;
-  padding: 0.2rem 0.55rem;
-  border-radius: 9999px;
-  letter-spacing: 0.02em;
+  @apply inline-flex items-center gap-1 bg-[#f97316] text-white text-[10px] font-bold tracking-wider uppercase px-2 py-0.5 rounded-full shadow-xs;
 }
 
-.grocery-qty-stepper {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.75rem;
-  background-color: #ebf7ee;
-  border: 1px solid #bbf0cd;
-  border-radius: 0.75rem;
-  padding: 0.35rem 0.65rem;
-  color: #0f3822;
-  font-weight: 700;
-  font-size: 0.9rem;
-}
-
-.grocery-chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem 1rem;
-  background-color: #ffffff;
-  border: 1.5px solid #e8e3d8;
-  border-radius: 9999px;
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: #3c4c42;
-  transition: all 0.2s ease;
-  user-select: none;
-}
-
-.grocery-chip:hover {
-  border-color: #108942;
-  color: #0f3822;
-  background-color: #ebf7ee;
-}
-
-.grocery-chip.active {
-  background-color: #0f3822;
-  border-color: #0f3822;
-  color: #ffffff;
+.badge-glass-dark {
+  @apply inline-flex items-center gap-2 bg-white/12 backdrop-blur-md border border-white/20 text-white text-xs font-medium px-3.5 py-1.5 rounded-full;
 }
 
 /* ==========================================================================
-   ANIMATIONS & KEYFRAMES
+   KEYFRAMES & ANIMATIONS
    ========================================================================== */
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(8px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(16px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes floatSlow {
-  0%, 100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-6px);
-  }
-}
-
-@keyframes pulseGlow {
-  0%, 100% {
-    opacity: 0.6;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.9;
-    transform: scale(1.05);
-  }
-}
-
-@keyframes shimmer {
-  0% {
-    background-position: -200% 0;
-  }
-  100% {
-    background-position: 200% 0;
-  }
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-6px); }
 }
 
 .animate-fade-in {
   animation: fadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-.animate-slide-up {
-  animation: slideUp 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .animate-float {
@@ -787,8 +329,4 @@ select:focus {
 .animate-float-delayed {
   animation: floatSlow 4.5s ease-in-out infinite;
   animation-delay: 2s;
-}
-
-.animate-pulse-glow {
-  animation: pulseGlow 3s ease-in-out infinite;
 }

@@ -1,55 +1,92 @@
 import { useNavigate } from "react-router-dom";
-import type { Product } from "../types"
+import type { Product } from "../types";
 import { Plus, Star } from "lucide-react";
 
 interface Props {
   product: Product;
 }
 
-const ProductCard = ({product}: Props) => {
+const ProductCard = ({ product }: Props) => {
   const currency = import.meta.env.VITE_CURRENCY_SYMBOL || "$";
-
-  const { addToCart } = {addToCart: (_data: any) => {}};
+  const { addToCart } = { addToCart: (_data: any) => {} };
   const navigate = useNavigate();
-  return (
-    <div className="bg-white rounded-2xl overflow-hidden shadow hover:shadow-md transition-all duration-300 group animate-fade-in cursor-pointer" onClick={() => navigate(`/products/${product._id}`)}>
-      <div className="relative aspect-square overflow-hidden">
-        <img src={product.image} alt={product.name} className="w-full h-full object-cover p-4 group-hover:p-2 transition-all duration-300"/>
 
-        <div className="absolute top-3 left-3 flex flex-wrap gap-1.5">
-          {product.discount > 0 && 
-            <span className="px-2 py-0.5 text-[10px] font-semibold uppercase bg-app-orange text-white rounded-full">
+  return (
+    <div
+      onClick={() => navigate(`/products/${product._id}`)}
+      className="product-card"
+    >
+      {/* Product Image Area */}
+      <div className="product-card-image-wrap">
+        <img
+          src={product.image}
+          alt={product.name}
+          className="product-card-image"
+        />
+
+        {/* Discount Badge */}
+        {product.discount > 0 && (
+          <div className="absolute top-2.5 left-2.5 flex flex-wrap gap-1">
+            <span className="badge-discount">
               {product.discount}% OFF
             </span>
-          }
-        </div>
-      </div>
-
-      <div className="p-3.5 text-zinc-700">
-        <h3 className="text-sm leading-snug mb-1.5 line-clamp-2">{product.name}</h3>
-
-        {product.rating > 0 && (
-          <div className="flex items-center gap-1 mb-2">
-            <Star className="size-3 text-app-warning fill-app-warning"/>
-            <span className="text-xs font-medium text-app-text">{product.rating}</span>
-            <span className="text-xs text-app-text-light">({product.reviewCount})</span>
           </div>
         )}
+      </div>
 
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-1 truncate">
-            <span className="text-base font-medium">{currency}{product.price.toFixed(1)}</span>
-            <span className="text-xs text-app-text-light block">/{product.unit}</span>
-            {product.originalPrice > product.price && <span className="text-xs text-app-text-light line-through ml-1.5">{currency}{product.originalPrice.toFixed(1)}</span>}
+      {/* Product Info */}
+      <div className="product-card-body">
+        <div>
+          {/* Star Rating */}
+          {product.rating > 0 && (
+            <div className="flex items-center gap-1 mb-1.5">
+              <Star className="w-3.5 h-3.5 text-amber-400 fill-amber-400" />
+              <span className="text-xs font-bold text-[#0e1e15]">
+                {product.rating}
+              </span>
+              <span className="text-xs text-[#9aaba1]">
+                ({product.reviewCount})
+              </span>
+            </div>
+          )}
+
+          {/* Product Name */}
+          <h3 className="product-card-title">
+            {product.name}
+          </h3>
+        </div>
+
+        {/* Price & Add to Cart Button */}
+        <div className="product-card-footer">
+          <div className="flex items-baseline gap-1 truncate">
+            <span className="product-price">
+              {currency}{product.price.toFixed(1)}
+            </span>
+            <span className="product-unit">
+              /{product.unit}
+            </span>
+            {product.originalPrice > product.price && (
+              <span className="product-price-old">
+                {currency}{product.originalPrice.toFixed(1)}
+              </span>
+            )}
           </div>
 
-          <button onClick={(e) => {e.stopPropagation(); addToCart(product)}} className="size-7 rounded-full bg-app-orange text-white flex-center shrink-0 hover:bg-app-orange-dark transition-colors active:scale-95">
-            <Plus className="size-3.5" />
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              addToCart(product);
+            }}
+            aria-label={`Add ${product.name} to cart`}
+            className="btn-add-cart"
+          >
+            <Plus className="w-4 h-4" />
           </button>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ProductCard
+export default ProductCard;
