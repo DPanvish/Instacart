@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { dummyProducts } from "../../assets/assets";
 import type { Product } from "../../types";
 import { Link } from "react-router-dom";
@@ -6,11 +5,7 @@ import { ArrowRightIcon } from "lucide-react";
 import ProductCard from "../ProductCard";
 
 const PopularProducts = () => {
-  const [products, setProducts] = useState<Product[]>([]);
-
-  useEffect(() => {
-    setProducts(dummyProducts.slice(0, 10));
-  }, []);
+  const products: Product[] = dummyProducts.slice(0, 10);
 
   return (
     <section className="py-8 sm:py-12">
