@@ -306,6 +306,33 @@ body {
 }
 
 /* ==========================================================================
+   NEWSLETTER & FOOTER (Tailwind Format)
+   ========================================================================== */
+.newsletter-card {
+  @apply bg-white py-12 sm:py-16 px-6 sm:px-12 rounded-3xl border border-[#e8e3d8] shadow-xs text-center max-w-3xl mx-auto my-12 sm:my-18 relative overflow-hidden;
+}
+
+.newsletter-icon-box {
+  @apply size-14 sm:size-16 rounded-2xl bg-gradient-to-tr from-[#ebf7ee] to-[#d8f3e0] border border-[#bbf0cd] text-[#108942] flex items-center justify-center mx-auto mb-5 shadow-xs;
+}
+
+.footer-container {
+  @apply bg-gradient-to-b from-[#0f3822] to-[#071e14] text-white border-t border-[#1b5333]/40;
+}
+
+.footer-section-title {
+  @apply text-xs font-bold uppercase tracking-wider text-emerald-400 mb-4;
+}
+
+.footer-link {
+  @apply text-sm text-white/70 hover:text-white transition-colors;
+}
+
+.social-icon-btn {
+  @apply size-9 rounded-xl bg-white/10 hover:bg-white/20 border border-white/10 flex items-center justify-center text-white/90 hover:text-white transition-all hover:scale-105 active:scale-95;
+}
+
+/* ==========================================================================
    KEYFRAMES & ANIMATIONS
    ========================================================================== */
 @keyframes fadeIn {
