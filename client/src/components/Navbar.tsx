@@ -17,10 +17,12 @@ import {
 } from "lucide-react";
 
 const Navbar = () => {
-  const user: any = { name: "John Doe", email: "john@example.com", isAdmin: true };
+  const user = { name: "John Doe", email: "john@example.com", isAdmin: true };
   const { cartCount, setIsCartOpen } = {
     cartCount: 5,
-    setIsCartOpen: (_date: any) => {},
+    setIsCartOpen: (open: boolean) => {
+      void open;
+    },
   };
   const [searchQuery, setSearchQuery] = useState("");
   const [userMenuOpen, setUserMenuOpen] = useState(false);
