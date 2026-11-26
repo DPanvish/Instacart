@@ -333,11 +333,51 @@ body {
 }
 
 /* ==========================================================================
+   CART SIDEBAR (Tailwind Format)
+   ========================================================================== */
+.cart-backdrop {
+  @apply fixed inset-0 bg-[#071e14]/45 backdrop-blur-xs z-50 transition-opacity;
+}
+
+.cart-drawer {
+  @apply fixed right-0 top-0 h-full w-full max-w-md bg-[#fbf9f5] z-50 shadow-2xl flex flex-col border-l border-[#e8e3d8];
+}
+
+.cart-drawer-header {
+  @apply flex items-center justify-between px-5 py-4 bg-white border-b border-[#e8e3d8];
+}
+
+.cart-drawer-footer {
+  @apply p-5 bg-white border-t border-[#e8e3d8] space-y-3;
+}
+
+.cart-item-card {
+  @apply flex gap-3.5 bg-white border border-[#e8e3d8] rounded-2xl p-3 shadow-xs hover:border-[#bbf0cd] transition-all;
+}
+
+.cart-item-image-wrap {
+  @apply size-18 rounded-xl bg-[#fbf9f5] border border-[#f0ece3] p-1.5 flex items-center justify-center shrink-0 overflow-hidden;
+}
+
+.cart-qty-stepper {
+  @apply inline-flex items-center gap-1 bg-[#fbf9f5] border border-[#e8e3d8] rounded-xl p-1;
+}
+
+.cart-qty-btn {
+  @apply size-7 rounded-lg bg-white border border-[#e8e3d8] hover:border-[#108942] hover:text-[#108942] flex items-center justify-center text-[#0e1e15] transition-all active:scale-90;
+}
+
+/* ==========================================================================
    KEYFRAMES & ANIMATIONS
    ========================================================================== */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(8px); }
   to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(100%); }
+  to { opacity: 1; transform: translateX(0); }
 }
 
 @keyframes floatSlow {
@@ -347,6 +387,10 @@ body {
 
 .animate-fade-in {
   animation: fadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .animate-float {
