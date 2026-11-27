@@ -336,11 +336,11 @@ body {
    CART SIDEBAR (Tailwind Format)
    ========================================================================== */
 .cart-backdrop {
-  @apply fixed inset-0 bg-[#071e14]/45 backdrop-blur-xs z-50 transition-opacity;
+  @apply fixed inset-0 bg-[#071e14]/45 backdrop-blur-xs z-50 transition-opacity overscroll-none;
 }
 
 .cart-drawer {
-  @apply fixed right-0 top-0 h-full w-full max-w-md bg-[#fbf9f5] z-50 shadow-2xl flex flex-col border-l border-[#e8e3d8];
+  @apply fixed right-0 top-0 h-full w-full max-w-md bg-[#fbf9f5] z-50 shadow-2xl flex flex-col border-l border-[#e8e3d8] overscroll-contain;
 }
 
 .cart-drawer-header {
