@@ -15,15 +15,11 @@ import {
   UserIcon,
   XIcon,
 } from "lucide-react";
+import { useCart } from "../context/CartContext";
 
 const Navbar = () => {
   const user = { name: "John Doe", email: "john@example.com", isAdmin: true };
-  const { cartCount, setIsCartOpen } = {
-    cartCount: 5,
-    setIsCartOpen: (open: boolean) => {
-      void open;
-    },
-  };
+  const { cartCount, setIsCartOpen } = useCart();
   const [searchQuery, setSearchQuery] = useState("");
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const navigate = useNavigate();
