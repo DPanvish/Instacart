@@ -1,3 +1,19 @@
+interface CategoryOption {
+  slug: string;
+  name: string;
+}
+
+interface FilterPanelProps {
+  categories: CategoryOption[];
+  category: string;
+  organic?: string;
+  minPrice: string;
+  maxPrice: string;
+  updateFilter: (key: string, value: string) => void;
+  clearFilters: () => void;
+  hasFilters: boolean | string;
+}
+
 const FilterPanel = ({
   categories,
   category,
@@ -6,8 +22,11 @@ const FilterPanel = ({
   updateFilter,
   clearFilters,
   hasFilters,
-}: any) => {
-  const categoriesWithAll = [{ slug: "", name: "All Categories" }, ...categories];
+}: FilterPanelProps) => {
+  const categoriesWithAll: CategoryOption[] = [
+    { slug: "", name: "All Categories" },
+    ...categories,
+  ];
 
   return (
     <div className="space-y-6">
@@ -15,7 +34,7 @@ const FilterPanel = ({
       <div>
         <h3 className="filter-section-title">Categories</h3>
         <div className="space-y-1">
-          {categoriesWithAll.map((cat: any) => (
+          {categoriesWithAll.map((cat) => (
             <button
               type="button"
               key={cat.slug}

@@ -1,6 +1,5 @@
-import { useEffect, useState } from "react";
+import { useMemo, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
-import type { Product } from "../types";
 import { categoriesData, dummyProducts } from "../assets/assets";
 import {
   ChevronDown,
@@ -15,9 +14,8 @@ import FilterPanel from "../components/FilterPanel";
 
 const Products = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [products, setProducts] = useState<Product[]>([]);
   const [totalPages] = useState(1);
-  const [loading, setLoading] = useState(true);
+  const [loading] = useState(false);
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
 
   const category = searchParams.get("category") || "";
@@ -25,15 +23,13 @@ const Products = () => {
   const sort = searchParams.get("sort") || "";
   const page = Number(searchParams.get("page")) || 1;
   const minPrice = searchParams.get("minPrice") || "";
-  const maxPrice = searchParams.get("minPrice") || "";
+  const maxPrice = searchParams.get("maxPrice") || "";
 
-  const fetchProducts = async () => {
-    setLoading(true);
-    setProducts(
-      dummyProducts.filter((p) => p.category === category || category === "")
-    );
-    setLoading(false);
-  };
+  const products = useMemo(
+    () =>
+      dummyProducts.filter((p) => p.category === category || category === ""),
+    [category]
+  );
 
   const updateFilter = (key: string, value: string) => {
     const newParams = new URLSearchParams(searchParams);
@@ -53,10 +49,6 @@ const Products = () => {
   const clearFilters = () => setSearchParams({});
   const activeCategory = categoriesData.find((c) => c.slug === category);
   const hasFilters = category || organic || minPrice || maxPrice;
-
-  useEffect(() => {
-    fetchProducts();
-  }, [category, organic, sort, page, minPrice, maxPrice]);
 
   return (
     <div className="min-h-screen bg-[#fbf9f5]">
