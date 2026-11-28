@@ -1,55 +1,73 @@
-
-
-const FilterPanel = ({categories, category, minPrice, maxPrice, updateFilter, clearFilters, hasFilters} : any) => {
-  const categoriesWithAll = [{slug: "", name: "All Categories"}, ...categories];
+const FilterPanel = ({
+  categories,
+  category,
+  minPrice,
+  maxPrice,
+  updateFilter,
+  clearFilters,
+  hasFilters,
+}: any) => {
+  const categoriesWithAll = [{ slug: "", name: "All Categories" }, ...categories];
 
   return (
     <div className="space-y-6">
+      {/* Categories Filter */}
       <div>
-        <h3 className="text-sm font-semibold text-app-green mb-3">Categories</h3>
-        <div className="space-y-1.5">
-          {categoriesWithAll.map((category: any) => (
-            <button 
-              key={category.slug}
-              onClick={() => updateFilter("category", category.slug)}
-              className={`block w-full text-left px-3 py-2 text-sm rounded-md transition-all ${category === category.slug ? "bg-app-green text-white" : "text-app-text-light hover:bg-app-cream"}`}
+        <h3 className="filter-section-title">Categories</h3>
+        <div className="space-y-1">
+          {categoriesWithAll.map((cat: any) => (
+            <button
+              type="button"
+              key={cat.slug}
+              onClick={() => updateFilter("category", cat.slug)}
+              className={`filter-category-btn ${
+                category === cat.slug ? "active" : "inactive"
+              }`}
             >
-              {category.name}
+              <span>{cat.name}</span>
             </button>
           ))}
         </div>
       </div>
 
-      <div>
-        <h3 className="text-sm font-semibold text-app-green mb-3">Price Range</h3>
+      {/* Price Range Filter */}
+      <div className="pt-4 border-t border-[#f0ece3]">
+        <h3 className="filter-section-title">Price Range</h3>
         <div className="flex items-center gap-2">
-          <input 
+          <input
             type="number"
             placeholder="Min"
             value={minPrice}
             onChange={(e) => updateFilter("minPrice", e.target.value)}
-            className="w-full px-3 py-2 text-sm bg-white rounded-lg border not-focus:border-app-border"
+            className="filter-price-input"
           />
 
-          <span className="text-app-text-light">-</span>
+          <span className="text-[#9aaba1] font-medium">-</span>
 
-          <input 
+          <input
             type="number"
             placeholder="Max"
             value={maxPrice}
             onChange={(e) => updateFilter("maxPrice", e.target.value)}
-            className="w-full px-3 py-2 text-sm bg-white rounded-lg border not-focus:border-app-border"
+            className="filter-price-input"
           />
         </div>
       </div>
 
+      {/* Clear Filters */}
       {hasFilters && (
-        <button onClick={clearFilters} className="w-full py-2 text-sm text-app-error hover:bg-red-50 rounded-lg transition-colors font-medium">
-          Clear All Filters
-        </button>
+        <div className="pt-2">
+          <button
+            type="button"
+            onClick={clearFilters}
+            className="w-full py-2.5 text-xs font-semibold text-red-600 bg-red-50/70 hover:bg-red-50 border border-red-200/70 rounded-xl transition-colors"
+          >
+            Clear All Filters
+          </button>
+        </div>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default FilterPanel
+export default FilterPanel;
