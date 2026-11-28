@@ -63,6 +63,7 @@ body {
   scrollbar-width: none;
 }
 
+@layer components {
 /* Common Layout Utilities */
 .flex-center {
   @apply flex items-center justify-center;
@@ -368,6 +369,54 @@ body {
 }
 
 /* ==========================================================================
+   PRODUCTS & FILTER PANEL (Tailwind Format)
+   ========================================================================== */
+.breadcrumb-nav {
+  @apply flex items-center gap-2 text-xs sm:text-sm text-[#6e7f75] mb-6;
+}
+
+.breadcrumb-link {
+  @apply hover:text-[#108942] transition-colors flex items-center;
+}
+
+.filter-panel-card {
+  @apply bg-white rounded-2xl border border-[#e8e3d8] p-5 sticky top-24 shadow-xs;
+}
+
+.filter-section-title {
+  @apply text-xs font-bold uppercase tracking-wider text-[#0f3822] mb-3;
+}
+
+.filter-category-btn {
+  @apply flex items-center justify-between w-full text-left px-3 py-2 text-sm font-medium rounded-xl transition-all;
+}
+
+.filter-category-btn.active {
+  @apply bg-[#0f3822] text-white font-semibold shadow-xs;
+}
+
+.filter-category-btn.inactive {
+  @apply text-[#3c4c42] hover:bg-[#ebf7ee] hover:text-[#0f3822];
+}
+
+.filter-price-input {
+  @apply w-full px-3 py-2 text-sm text-[#0e1e15] bg-[#fbf9f5] rounded-xl border border-[#e8e3d8] placeholder:text-[#9aaba1] focus:bg-white focus:border-[#108942] focus:ring-2 focus:ring-[#108942]/15 focus:outline-none transition-all;
+}
+
+.sort-select {
+  @apply appearance-none pl-3.5 pr-9 py-2 text-sm font-medium text-[#0e1e15] bg-white rounded-xl border border-[#e8e3d8] hover:border-[#cbd5cf] focus:border-[#108942] focus:ring-2 focus:ring-[#108942]/15 focus:outline-none cursor-pointer transition-all shadow-xs;
+}
+
+.mobile-filter-sheet {
+  @apply fixed bottom-0 left-0 right-0 bg-white z-50 rounded-t-3xl max-h-[82vh] overflow-y-auto border-t border-[#e8e3d8] shadow-2xl overscroll-contain;
+}
+
+.pagination-btn {
+  @apply size-9 rounded-xl text-sm font-semibold transition-all flex items-center justify-center;
+}
+}
+
+/* ==========================================================================
    KEYFRAMES & ANIMATIONS
    ========================================================================== */
 @keyframes fadeIn {
@@ -378,6 +427,11 @@ body {
 @keyframes slideInRight {
   from { opacity: 0; transform: translateX(100%); }
   to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideInUp {
+  from { opacity: 0; transform: translateY(100%); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes floatSlow {
@@ -391,6 +445,10 @@ body {
 
 .animate-slide-in-right {
   animation: slideInRight 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-slide-in-up {
+  animation: slideInUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .animate-float {
